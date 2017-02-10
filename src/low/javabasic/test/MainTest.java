@@ -1,13 +1,66 @@
 package low.javabasic.test;
 
 import java.sql.Date;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 
 public class MainTest {
 	public static void main(String[] args) {
-		MainTest mt = new MainTest();
-		mt.mapAddDuplicatedKey();
+//		MainTest mt = new MainTest();
+//		mt.StringArrayToString();
+		
+//		Object a = "1483672252asdf";
+//		try {
+//			Long a_long = Long.parseLong(a.toString());
+//		} catch (Exception e) {
+//			System.out.println("fail");
+//		}
+		
+//		if(a_long instanceof Long){
+//			System.out.println("YES, It is long type");
+//		} else {
+//			System.out.println("nonono");
+//		}
+		
+		Integer a = null;
+//		System.out.println(a.getClass());
+		System.out.println("a".equals(a));
+	}
+	
+	public void mapGetNoKey(){
+		Map<String, String> a = Maps.newHashMap();
+		a.put("a", "aaa");
+		
+		Object c = a.get("c");
+		System.out.println(c);;			//null
+	}
+	
+	public void StringArrayToString(){
+		String[] array = {"a", "b", "c", "d"};
+		System.out.println(array);
+		System.out.println(Arrays.toString(array));
+		String[] b = {"a"};
+		System.out.println(Arrays.toString(b));
+	}
+	
+	public void Object2ListString(){
+		List<String> list = Lists.newArrayList();
+		list.add("a");
+		list.add("b");
+		list.add("c");
+		list.add("d");
+		
+		Object obj = list;
+		System.out.println(list);
+		System.out.println(obj);
+		System.out.println(obj.getClass());
+		System.out.println((List<String>)obj);
+		System.out.println(obj instanceof List);
 	}
 	
 	/**
