@@ -13,8 +13,10 @@ import com.alibaba.fastjson.serializer.ValueFilter;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 import com.google.common.collect.Lists;
+import com.google.common.reflect.TypeToken;
+import com.google.gson.Gson;
+import com.netease.da.ark2.thrift.funnel.Event;
 
-import bean.Event;
 import util.etc.BeanMapUtil;
 
 /**
@@ -53,7 +55,7 @@ public class MainTest {
 //			e.printStackTrace();
 //		} 
 		
-		String a = "1";
+//		String a = "1";
 //		String b = "{a:'1'}";
 //		String c = "['tes','see','ase']";
 //		String d = "['{a:'1'}','{a:'1'}','{a:'1'}']";
@@ -65,12 +67,12 @@ public class MainTest {
 //		System.out.println(obj + "---" + obj.getClass());
 //		obj = JSON.parse(c);
 //		System.out.println(obj + "---" + obj.getClass());
-		Object a_int = 1;
-		Object a_Integer = new Integer(1);
-		
-		System.out.println(isPrimitiveWrapper(a));
-		System.out.println(isPrimitiveWrapper(a_int));
-		System.out.println(isPrimitiveWrapper(a_Integer));
+//		Object a_int = 1;
+//		Object a_Integer = new Integer(1);
+//		
+//		System.out.println(isPrimitiveWrapper(a));
+//		System.out.println(isPrimitiveWrapper(a_int));
+//		System.out.println(isPrimitiveWrapper(a_Integer));
 //		obj = JSON.parse(a_int.toString());
 //		System.out.println(obj.getClass());
 //		System.out.println(a_int.getClass());
@@ -87,6 +89,10 @@ public class MainTest {
 //		System.out.println(JSON.toJSONString(obj, valueFilter));
 		
 //		System.out.println(new Integer(1).toString());
+		
+		String tmp = "[{\"eventName\":\"SearchSuggestEnter,3b5a50217dc23aba075844cdefa631bd8ffada4f91483cecad31683ab49997fe\",\"relation\":\"AND\",\"filter\":{\"relation\":\"\",\"conditions\":[]},\"auto\":true,\"autoEventNames\":[\"SearchSuggestEnter\",\"3b5a50217dc23aba075844cdefa631bd8ffada4f91483cecad31683ab49997fe\"]},{\"eventName\":\"单日志页面浏览\",\"relation\":\"AND\",\"filter\":{\"conditions\":[]}}]";
+		List<Event> test = new Gson().fromJson(tmp, new TypeToken<List<Event>>(){}.getType());
+		System.out.println(test.get(0).getEventName());
 	}
 	
 	public static boolean isPrimitiveWrapper(Object o){

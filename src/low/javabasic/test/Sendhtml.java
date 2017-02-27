@@ -53,7 +53,6 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import javax.mail.util.ByteArrayDataSource;
 
-
 /**
  * Demo app that shows how to construct and send a single part html message.
  * Note that the same basic technique can be used to send data of any type.
@@ -65,42 +64,40 @@ import javax.mail.util.ByteArrayDataSource;
 
 public class Sendhtml {
 
-	private static final String sender = "grp.hzda@corp.netease.com";
+	private static final String sender = "xxx@xx.com";
 	private static Properties props;
 	private static Authenticator auth;
 	private static String nick;
+
 	static {
 		props = new Properties();
 		// 创建信件服务器
-		props.put("mail.smtp.host", "corp.netease.com");
+		props.put("mail.smtp.host", "");
 		props.put("mail.smtp.auth", "true");
 		props.put("mail.transport.protocol", "smtp");
 		auth = new Authenticator() {
 			public PasswordAuthentication getPasswordAuthentication() {
-				return new PasswordAuthentication("grp.hzda@corp.netease.com",
-						"7b2378510b7dfb544ce93d6098c9d313");
+				return new PasswordAuthentication("user", "pass");
 			}
 		};
 		try {
-			nick = javax.mail.internet.MimeUtility.encodeText("数据分析");
+			nick = javax.mail.internet.MimeUtility.encodeText("text");
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-	
-	public boolean sendMail(String to, String subject, String html,
-			String[] filePath) {
-	
+
+	public boolean sendMail(String to, String subject, String html, String[] filePath) {
+
 		try {
-			
+
 			Session session = Session.getInstance(props, auth);
 			// session.setDebug(true);
-			Message msg = new MimeMessage(session);		
+			Message msg = new MimeMessage(session);
 			msg.setFrom(new InternetAddress(sender));
 
-			msg.setRecipients(Message.RecipientType.TO,
-					InternetAddress.parse(to, false));
+			msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to, false));
 
 			// msg.setRecipients(Message.RecipientType.CC,InternetAddress.parse(cc,
 			// false));
@@ -108,8 +105,7 @@ public class Sendhtml {
 			msg.setSubject(subject);
 
 			MimeBodyPart contentBody = new MimeBodyPart();
-			contentBody.setDataHandler(new DataHandler(new ByteArrayDataSource(
-					html, "text/html")));
+			contentBody.setDataHandler(new DataHandler(new ByteArrayDataSource(html, "text/html")));
 
 			MimeMultipart allPart = new MimeMultipart("mixed");
 			allPart.addBodyPart(contentBody);
@@ -129,17 +125,17 @@ public class Sendhtml {
 
 			// send the thing off
 			Transport.send(msg);
-//			logger.info("Mail was sent:" + to + " successfully.");
+			// logger.info("Mail was sent:" + to + " successfully.");
 			return true;
 		} catch (Exception e) {
-//			logger.error(e);
+			// logger.error(e);
 		}
 		return false;
 	}
 
 	public static void main(String[] args) {
 		Sendhtml s = new Sendhtml();
-//		String[] ss = { "/Users/jiangww/Shell/1.sql" };
-		s.sendMail("hzhuolirong@corp.netease.com", "test", "gg", null);
+		// String[] ss = { "/Users/test/Shell/1.sql" };
+		s.sendMail("test@xx.com", "test", "gg", null);
 	}
 }
